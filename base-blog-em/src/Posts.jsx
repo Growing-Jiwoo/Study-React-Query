@@ -28,7 +28,7 @@ export function Posts(pageNum) {
   }, [currentPage, queryClient]);
 
   // replace with useQuery
-  const { data, isError, Error, isLoading } = useQuery(
+  const { data, isError, Error, isLoading, isFetching } = useQuery(
     ["posts", currentPage],
     () => fetchPosts(currentPage),
     {
@@ -37,6 +37,7 @@ export function Posts(pageNum) {
       // keepPreviousData: true를 하면 이미 cache된 데이터를 다시 불러올 때 깜빡거리지 않음
     }
   );
+  // if (isFetching) return <h3>Fetching in progress...</h3>;
   if (isLoading) return <h3>Loading...</h3>;
   if (isError)
     return (
