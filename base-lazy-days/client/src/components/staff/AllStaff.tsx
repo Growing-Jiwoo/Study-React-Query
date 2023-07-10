@@ -1,9 +1,9 @@
-import { Box, Heading, HStack, Radio, RadioGroup } from '@chakra-ui/react';
-import { ReactElement } from 'react';
+import { Box, Heading, HStack, Radio, RadioGroup } from "@chakra-ui/react";
+import { ReactElement } from "react";
 
-import { useTreatments } from '../treatments/hooks/useTreatments';
-import { useStaff } from './hooks/useStaff';
-import { Staff } from './Staff';
+import { useTreatments } from "../treatments/hooks/useTreatments";
+import { useStaff } from "./hooks/useStaff";
+import { Staff } from "./Staff";
 
 export function AllStaff(): ReactElement {
   // replace with data from React Query
