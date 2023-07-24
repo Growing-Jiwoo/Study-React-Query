@@ -13,13 +13,11 @@ async function getTreatments(): Promise<Treatment[]> {
 export function useTreatments(): Treatment[] {
   // TODO: get data from server via useQuery
   const fallback = [];
-  const { data = fallback } = useQuery([queryKeys.treatments], getTreatments, {
-    staleTime: 6000, // 1분
-    cacheTime: 30000, // 5분 (cacheTime의 기본값은 5분이고 cacheTime이 statleTime보다 짧아선 안됨)
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
-  });
+  const { data = fallback } = useQuery(
+    [queryKeys.treatments],
+    getTreatments,
+    {}
+  );
   return data;
 }
 
