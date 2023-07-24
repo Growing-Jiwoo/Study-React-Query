@@ -35,6 +35,11 @@ interface UseAppointments {
   setShowAll: Dispatch<SetStateAction<boolean>>;
 }
 
+const commonOptions = {
+  staleTime: 0,
+  cacheTime: 300000, // 5분
+};
+
 // 이 훅의 사용 용도:
 //   1. 사용자의 현재 월과 연도를 추적하는 것 (aka monthYear)
 //     1a. 사용자가 버튼을 통해 달력 년월을 이동할 때 마다 monthYear 업데이트
@@ -62,9 +67,11 @@ export function useAppointments(): UseAppointments {
 
   useEffect(() => {
     const nextMonthYear = getNewMonthYear(monthYear, 1);
+
     queryClient.prefetchQuery(
       [queryKeys.appointments, nextMonthYear.year, nextMonthYear.month],
-      () => getAppointments(nextMonthYear.year, nextMonthYear.month)
+      () => getAppointments(nextMonthYear.year, nextMonthYear.month),
+      commonOptions
     );
   }, [monthYear, queryClient]);
 
@@ -75,6 +82,10 @@ export function useAppointments(): UseAppointments {
     () => getAppointments(monthYear.year, monthYear.month),
     {
       select: showAll ? undefined : selectFn,
+      ...commonOptions,
+      refetchOnMount: true,
+      refetchOnReconnect: true,
+      refetchOnWindowFocus: true,
     }
   );
 
