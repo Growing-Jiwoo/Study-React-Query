@@ -38,22 +38,6 @@ export function Signin(): ReactElement {
           <Box rounded="lg" bg="white" boxShadow="lg" p={8}>
             <Stack spacing={4}>
               <FormControl
-                id="password"
-                isRequired
-                isInvalid={!password && dirty.password}
-              >
-                <FormLabel>Password</FormLabel>
-                <Input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  onBlur={() =>
-                    setDirty((prevDirty) => ({ ...prevDirty, password: true }))
-                  }
-                />
-                <FormErrorMessage>Password may not be blank</FormErrorMessage>
-              </FormControl>
-              <FormControl
                 id="email"
                 isRequired
                 isInvalid={!email && dirty.email}
@@ -69,7 +53,22 @@ export function Signin(): ReactElement {
                 />
                 <FormErrorMessage>Email may not be blank</FormErrorMessage>
               </FormControl>
-
+              <FormControl
+                id="password"
+                isRequired
+                isInvalid={!password && dirty.password}
+              >
+                <FormLabel>Password</FormLabel>
+                <Input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  onBlur={() =>
+                    setDirty((prevDirty) => ({ ...prevDirty, password: true }))
+                  }
+                />
+                <FormErrorMessage>Password may not be blank</FormErrorMessage>
+              </FormControl>
               <HStack spacing={2} width="100%">
                 <Button
                   variant="outline"

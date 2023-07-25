@@ -33,12 +33,11 @@ export function useUser(): UseUser {
   // const user = null;
   const queryClient = useQueryClient();
   const { data: user } = useQuery([queryKeys.user], () => getUser(user), {
-    // initialData: getStoredUser(),
+    initialData: getStoredUser(),
     onSuccess: (received: User | null) => {
       if (!received) {
         clearStoredUser();
       } else {
-        console.log("HOI");
         setStoredUser(received);
       }
     },
@@ -54,6 +53,7 @@ export function useUser(): UseUser {
   function clearUser() {
     // TODO: reset user to null in query cache
     queryClient.setQueriesData([queryKeys.user], null);
+    queryClient.removeQueries(["user-appointments"]);
   }
 
   return { user, updateUser, clearUser };
