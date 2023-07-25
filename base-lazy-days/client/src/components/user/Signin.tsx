@@ -9,17 +9,17 @@ import {
   HStack,
   Input,
   Stack,
-} from '@chakra-ui/react';
-import { ReactElement, useState } from 'react';
-import { Redirect } from 'react-router-dom';
+} from "@chakra-ui/react";
+import { ReactElement, useState } from "react";
+import { Redirect } from "react-router-dom";
 
-import { useAuth } from '../../auth/useAuth';
-import { useUser } from './hooks/useUser';
+import { useAuth } from "../../auth/useAuth";
+import { useUser } from "./hooks/useUser";
 
 // eslint-disable-next-line max-lines-per-function
 export function Signin(): ReactElement {
-  const [email, setEmail] = useState('test');
-  const [password, setPassword] = useState('test');
+  const [email, setEmail] = useState("test");
+  const [password, setPassword] = useState("test");
   const [dirty, setDirty] = useState({ email: false, password: false });
   const auth = useAuth();
   const { user } = useUser();
@@ -38,22 +38,6 @@ export function Signin(): ReactElement {
           <Box rounded="lg" bg="white" boxShadow="lg" p={8}>
             <Stack spacing={4}>
               <FormControl
-                id="email"
-                isRequired
-                isInvalid={!email && dirty.email}
-              >
-                <FormLabel>Email address</FormLabel>
-                <Input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  onBlur={() =>
-                    setDirty((prevDirty) => ({ ...prevDirty, email: true }))
-                  }
-                />
-                <FormErrorMessage>Email may not be blank</FormErrorMessage>
-              </FormControl>
-              <FormControl
                 id="password"
                 isRequired
                 isInvalid={!password && dirty.password}
@@ -69,6 +53,23 @@ export function Signin(): ReactElement {
                 />
                 <FormErrorMessage>Password may not be blank</FormErrorMessage>
               </FormControl>
+              <FormControl
+                id="email"
+                isRequired
+                isInvalid={!email && dirty.email}
+              >
+                <FormLabel>Email address</FormLabel>
+                <Input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  onBlur={() =>
+                    setDirty((prevDirty) => ({ ...prevDirty, email: true }))
+                  }
+                />
+                <FormErrorMessage>Email may not be blank</FormErrorMessage>
+              </FormControl>
+
               <HStack spacing={2} width="100%">
                 <Button
                   variant="outline"
