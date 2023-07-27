@@ -86,7 +86,7 @@ export function useAppointments(): UseAppointments {
       refetchOnMount: true,
       refetchOnReconnect: true,
       refetchOnWindowFocus: true,
-      refetchInterval: 1000,
+      refetchInterval: 60000,
     }
   );
 

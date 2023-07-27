@@ -45,7 +45,7 @@ export function useUser(): UseUser {
 
   // meant to be called from useAuth
   function updateUser(newUser: User): void {
-    // TODO: update the user in the query cache
+    setStoredUser(newUser);
     queryClient.setQueryData([queryKeys.user], newUser);
   }
 
@@ -53,7 +53,8 @@ export function useUser(): UseUser {
   function clearUser() {
     // TODO: reset user to null in query cache
     queryClient.setQueriesData([queryKeys.user], null);
-    queryClient.removeQueries(["user-appointments"]);
+    queryClient.removeQueries([queryKeys.appointments, queryKeys.user]);
+    clearStoredUser();
   }
 
   return { user, updateUser, clearUser };

@@ -31,64 +31,72 @@ export function Signin(): ReactElement {
   return (
     <>
       <Flex minH="84vh" textAlign="center" justify="center">
-        <Stack spacing={8} mx="auto" maxW="lg" py={12} px={6}>
-          <Stack textAlign="center">
-            <Heading>Sign in to your account</Heading>
-          </Stack>
-          <Box rounded="lg" bg="white" boxShadow="lg" p={8}>
-            <Stack spacing={4}>
-              <FormControl
-                id="email"
-                isRequired
-                isInvalid={!email && dirty.email}
-              >
-                <FormLabel>Email address</FormLabel>
-                <Input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  onBlur={() =>
-                    setDirty((prevDirty) => ({ ...prevDirty, email: true }))
-                  }
-                />
-                <FormErrorMessage>Email may not be blank</FormErrorMessage>
-              </FormControl>
-              <FormControl
-                id="password"
-                isRequired
-                isInvalid={!password && dirty.password}
-              >
-                <FormLabel>Password</FormLabel>
-                <Input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  onBlur={() =>
-                    setDirty((prevDirty) => ({ ...prevDirty, password: true }))
-                  }
-                />
-                <FormErrorMessage>Password may not be blank</FormErrorMessage>
-              </FormControl>
-              <HStack spacing={2} width="100%">
-                <Button
-                  variant="outline"
-                  type="submit"
-                  isDisabled={!email || !password}
-                  onClick={() => auth.signup(email, password)}
-                >
-                  Sign up
-                </Button>
-                <Button
-                  type="submit"
-                  isDisabled={!email || !password}
-                  onClick={() => auth.signin(email, password)}
-                >
-                  Sign in
-                </Button>
-              </HStack>
+        <form onSubmit={(e) => e.preventDefault()}>
+          {/* Add the form tag */}
+          <Stack spacing={8} mx="auto" maxW="lg" py={12} px={6}>
+            <Stack textAlign="center">
+              <Heading>Sign in to your account</Heading>
             </Stack>
-          </Box>
-        </Stack>
+            <Box rounded="lg" bg="white" boxShadow="lg" p={8}>
+              <Stack spacing={4}>
+                <FormControl
+                  id="email"
+                  isRequired
+                  isInvalid={!email && dirty.email}
+                >
+                  <FormLabel>Email address</FormLabel>
+                  <Input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    onBlur={() =>
+                      setDirty((prevDirty) => ({ ...prevDirty, email: true }))
+                    }
+                  />
+                  <FormErrorMessage>Email may not be blank</FormErrorMessage>
+                </FormControl>
+                <FormControl
+                  id="password"
+                  isRequired
+                  isInvalid={!password && dirty.password}
+                >
+                  <FormLabel>Password</FormLabel>
+                  <Input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    onBlur={() =>
+                      setDirty((prevDirty) => ({
+                        ...prevDirty,
+                        password: true,
+                      }))
+                    }
+                    autoComplete="current-password" // Add the autocomplete attribute
+                  />
+                  <FormErrorMessage>Password may not be blank</FormErrorMessage>
+                </FormControl>
+                <HStack spacing={2} width="100%">
+                  <Button
+                    variant="outline"
+                    type="submit"
+                    isDisabled={!email || !password}
+                    onClick={() => auth.signup(email, password)}
+                  >
+                    Sign up
+                  </Button>
+                  <Button
+                    type="submit"
+                    isDisabled={!email || !password}
+                    onClick={() => auth.signin(email, password)}
+                  >
+                    Sign in
+                  </Button>
+                </HStack>
+              </Stack>
+            </Box>
+          </Stack>
+        </form>{" "}
+        {/* Close the form tag */}
       </Flex>
     </>
   );

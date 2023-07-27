@@ -1,4 +1,4 @@
-import { QueryClient } from "@tanstack/react-query";
+import { MutationCache, QueryCache, QueryClient } from "@tanstack/react-query";
 import { createStandaloneToast } from "@chakra-ui/react";
 import { theme } from "../theme";
 
@@ -15,14 +15,20 @@ function queryErrorHandler(error: unknown): void {
 }
 
 export const queryClient = new QueryClient({
+  queryCache: new QueryCache({
+    onError: queryErrorHandler,
+  }),
+  mutationCache: new MutationCache({
+    onError: queryErrorHandler,
+  }),
   defaultOptions: {
     queries: {
-      onError: queryErrorHandler,
       staleTime: 600000, // 10분
       cacheTime: 900000, // 15분
       refetchOnMount: false,
       refetchOnReconnect: false,
       refetchOnWindowFocus: false,
     },
+    mutations: {},
   },
 });
